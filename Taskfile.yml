@@ -1,0 +1,23 @@
+version: "3"
+
+tasks:
+  frontend:
+    dir: frontend
+    cmds:
+      - python3 -m http.server 3000
+
+  backend:
+    dir: backend
+    cmds:
+      - go run .
+
+  ai:
+    dir: ai-service
+    cmds:
+      - uv run uvicorn main:app --reload
+
+  dev:
+    deps:
+      - frontend
+      - backend
+      - ai
