@@ -13,6 +13,7 @@ import (
 
 type ChatRequest struct{
 	Question string `json:"question"`
+	URL string `json:"url"`
 }
 
 type AIResponse struct{
@@ -28,8 +29,9 @@ func handlerChat(c *gin.Context){
 		return
 	}
 
-	log.Printf("Recieved from browser %s \n", req.Question)
-	
+	log.Printf("Recieved from browser this question: %s \n", req.Question)
+	log.Printf("Recieved from browser this url: %s \n", req.URL)
+
 	body, _ := json.Marshal(req)	
 
 	resp, err := http.Post(

@@ -3,6 +3,9 @@ async function askAI() {
     const question =
         document.getElementById("question").value
 
+    const url =
+        document.getElementById("url").value
+
     const response = await fetch(
         "http://localhost:8080/chat",
         {
@@ -11,7 +14,8 @@ async function askAI() {
                 "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                question
+                question,
+                url
             })
         }
     )

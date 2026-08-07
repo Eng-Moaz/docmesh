@@ -1,20 +1,22 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from utils import respond
+from scraper.scraper import scrape
 
 app = FastAPI()
 
 class ChatRequest(BaseModel):
     question: str
+    url: str
 
 @app.post("/chat")
 def chat_handler(req: ChatRequest):
-    response = respond(req.question) 
+    context = scrape(req.url)
+    response = respond(req.question, context)
 
     return {
-            "answer": f"{response}",
-            "sources": [
-                "demo-source",
-                "go.dev"
-                ]
-            }
+        "answer": response,
+        "sources": [
+            f"{req.url}"
+        ]
+    }
