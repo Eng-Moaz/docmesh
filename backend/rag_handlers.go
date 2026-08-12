@@ -61,3 +61,5 @@ func handlerChat(c *gin.Context){
 	log.Printf("Response from AI: %s", ai.Answer)
 	c.JSON(http.StatusAccepted, ai)
 }
+
+
